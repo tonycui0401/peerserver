@@ -19,27 +19,27 @@ require('dotenv').config()
 // server.listen(process.env.PORT || 9000);
 
 
-const express = require('express');
-const { ExpressPeerServer } = require('peer');
+// const express = require('express');
+// const { ExpressPeerServer } = require('peer');
 
-const app = express();
+// const app = express();
 
-app.get('/', (req, res, next) => res.send('Hello world!'));
+// app.get('/', (req, res, next) => res.send('Hello world!'));
 
-// =======
+// // =======
 
-const server = app.listen(9000);
+// const server = app.listen(9000);
 
-const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
+// const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
 
-console.log(customGenerationFunction);
+// console.log(customGenerationFunction);
 
-const peerServer = ExpressPeerServer(server, {
-  // path: '/myapp'
-  port: 9000,
-  path: '/myapp',
-  generateClientId: customGenerationFunction
-});
+// const peerServer = ExpressPeerServer(server, {
+//   // path: '/myapp'
+//   port: 9000,
+//   path: '/myapp',
+//   generateClientId: customGenerationFunction
+// });
 
 // app.use('/peerjs', peerServer);
 
@@ -56,3 +56,22 @@ const peerServer = ExpressPeerServer(server, {
 // app.use('/peerjs', peerServer);
 
 // server.listen(9000);
+
+
+// initialize express
+var express = require('express');
+var app = express();
+// create express peer server
+var ExpressPeerServer = require('peer').ExpressPeerServer;
+
+var options = {
+    debug: true
+}
+
+// create a http server instance to listen to request
+var server = require('http').createServer(app);
+
+// peerjs is the path that the peerjs server will be connected to.
+app.use('/peerjs', ExpressPeerServer(server, options));
+// Now listen to your ip and port.
+server.listen(8878, "http://18.168.149.207/");
