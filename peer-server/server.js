@@ -1,18 +1,19 @@
 require('dotenv').config()
 const express = require("express");
 const { ExpressPeerServer } = require("peer");
-const server = require("http").Server(express);
+
 const app = express();
 
 app.get("/", (req, res, next) => res.send("Hello world!"));
 
 const http = require("http");
 
-// const server = http.createServer(app);
+const server = http.createServer(express);
 const peerServer = ExpressPeerServer(server, {
   debug: true,
+  path: "/",
 });
 
-app.use("/", peerServer);
+app.use("/peerjs", peerServer);
 
 server.listen(process.env.PORT || 9000);
