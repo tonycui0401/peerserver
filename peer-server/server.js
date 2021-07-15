@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const { ExpressPeerServer } = require("peer");
-const server = require("http").Server(app);
+const server = require("http").Server(express);
 const app = express();
 
 app.get("/", (req, res, next) => res.send("Hello world!"));
