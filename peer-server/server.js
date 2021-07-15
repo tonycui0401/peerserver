@@ -30,11 +30,18 @@ app.get('/', (req, res, next) => res.send('Hello world!'));
 
 const server = app.listen(9000);
 
+const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
+
+console.log(customGenerationFunction);
+
 const peerServer = ExpressPeerServer(server, {
-  path: '/myapp'
+  // path: '/myapp'
+  port: 9000,
+  path: '/myapp',
+  generateClientId: customGenerationFunction
 });
 
-app.use('/peerjs', peerServer);
+// app.use('/peerjs', peerServer);
 
 // // == OR ==
 
