@@ -77,30 +77,42 @@ require('dotenv').config()
 // server.listen(8878, "http://18.168.149.207/");
 
 
-const express = require("express");
-const http = require('http');
-const path = require('path');
-const app = express();
-const server = http.createServer(app);
-const { ExpressPeerServer } = require('peer');
-const port = process.env.PORT || "8000";
+// const express = require("express");
+// const http = require('http');
+// const path = require('path');
+// const app = express();
+// const server = http.createServer(app);
+// const { ExpressPeerServer } = require('peer');
+// const port = process.env.PORT || "8000";
 
-const peerServer = ExpressPeerServer(server, {
-    proxied: true,
-    debug: true,
-    path: '/myapp',
-    ssl: {},
-    generateClientId: '12345',
+// const peerServer = ExpressPeerServer(server, {
+//     proxied: true,
+//     debug: true,
+//     path: '/myapp',
+//     ssl: {},
+//     generateClientId: '12345',
+// });
+
+// app.use(peerServer);
+
+// app.use(express.static(path.join(__dirname)));
+
+// app.get("/", (request, response) => {
+//     // response.sendFile(__dirname + "/index.html");
+//     response.send('Hello world!');
+// });
+
+// server.listen(port);
+// console.log('Listening on: ' + port);
+
+var fs = require('fs');
+var PeerServer = require('peer').PeerServer;
+
+var server = PeerServer({
+    port: 9000,
+    path: '/peerjs',
+    ssl: {
+        // key: fs.readFileSync('./../certificates/key.pem', 'utf8'),
+        // cert: fs.readFileSync('./../certificates/cert.pem', 'utf8')
+    }
 });
-
-app.use(peerServer);
-
-app.use(express.static(path.join(__dirname)));
-
-app.get("/", (request, response) => {
-    // response.sendFile(__dirname + "/index.html");
-    response.send('Hello world!');
-});
-
-server.listen(port);
-console.log('Listening on: ' + port);
