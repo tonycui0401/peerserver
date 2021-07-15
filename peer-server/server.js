@@ -58,20 +58,48 @@ require('dotenv').config()
 // server.listen(9000);
 
 
-// initialize express
-var express = require('express');
-var app = express();
-// create express peer server
-var ExpressPeerServer = require('peer').ExpressPeerServer;
+// // initialize express
+// var express = require('express');
+// var app = express();
+// // create express peer server
+// var ExpressPeerServer = require('peer').ExpressPeerServer;
 
-var options = {
-    debug: true
-}
+// var options = {
+//     debug: true
+// }
 
-// create a http server instance to listen to request
-var server = require('http').createServer(app);
+// // create a http server instance to listen to request
+// var server = require('http').createServer(app);
 
-// peerjs is the path that the peerjs server will be connected to.
-app.use('/peerjs', ExpressPeerServer(server, options));
-// Now listen to your ip and port.
-server.listen(8878, "http://18.168.149.207/");
+// // peerjs is the path that the peerjs server will be connected to.
+// app.use('/peerjs', ExpressPeerServer(server, options));
+// // Now listen to your ip and port.
+// server.listen(8878, "http://18.168.149.207/");
+
+
+const express = require("express");
+const http = require('http');
+const path = require('path');
+const app = express();
+const server = http.createServer(app);
+const { ExpressPeerServer } = require('peer');
+const port = process.env.PORT || "8000";
+
+const peerServer = ExpressPeerServer(server, {
+    proxied: true,
+    debug: true,
+    path: '/myapp',
+    ssl: {}
+});
+
+app.use(peerServer);
+
+app.use(express.static(path.join(__dirname)));
+
+app.get("/", (request, response) => {
+    // response.sendFile(__dirname + "/index.html");
+    response.send('Hello world!');
+});
+
+server.listen(port);
+console.log('Listening on: ' + port);
