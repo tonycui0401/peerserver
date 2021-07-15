@@ -36,16 +36,16 @@ const peerServer = ExpressPeerServer(server, {
 
 app.use('/peerjs', peerServer);
 
-// == OR ==
+// // == OR ==
 
-const http = require('http');
+// const http = require('http');
 
-const server = http.createServer(app);
-const peerServer = ExpressPeerServer(server, {
-  debug: true,
-  path: '/myapp'
-});
+// const server = http.createServer(app);
+// const peerServer = ExpressPeerServer(server, {
+//   debug: true,
+//   path: '/myapp'
+// });
 
-app.use('/peerjs', peerServer);
+// app.use('/peerjs', peerServer);
 
-server.listen(9000);
+// server.listen(9000);
