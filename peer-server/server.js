@@ -13,6 +13,6 @@ const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
 
-app.use("/peerjs", peerServer);
+app.use("/", peerServer);
 
 server.listen(process.env.PORT || 9000);
