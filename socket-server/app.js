@@ -61,17 +61,17 @@ io.on("connection", function(socket) {
 
 
 
-  socket.on("register", (username) => this.onRegister(socket, username));
-      socket.on("set-peer-id", (peerId) => this.onSetPeerId(socket, peerId));
-      socket.on("call", (username) => this.onCall(socket, username));
+  socket.on("register", (username) => onRegister(socket, username));
+      socket.on("set-peer-id", (peerId) => onSetPeerId(socket, peerId));
+      socket.on("call", (username) => onCall(socket, username));
       socket.on("reject-call", (username) =>
-        this.onRejectCall(socket, username)
+        onRejectCall(socket, username)
       );
       socket.on("accept-call", (username) =>
-        this.onAcceptCall(socket, username)
+        onAcceptCall(socket, username)
       );
       console.log(`${Date(Date.now()).toLocaleString()}: new user connected`);
-      socket.on("disconnect", () => this.onDisconnect(socket));
+      socket.on("disconnect", () => onDisconnect(socket));
 
 
 
