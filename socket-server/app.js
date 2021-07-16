@@ -120,7 +120,7 @@ onRegister = (socket, username) => {
     peerId: "",
     socketId: socket.id,
   };
-  this.onUsersChange(socket);
+  onUsersChange(socket);
 };
 
 getUsers = () => {
@@ -132,7 +132,7 @@ getUsers = () => {
 };
 
 onUsersChange = (socket) => {
-  io.emit("users-change", this.getUsers());
+  io.emit("users-change", getUsers());
 };
 
 onSetPeerId = (socket, peerId) => {
@@ -142,7 +142,7 @@ onSetPeerId = (socket, peerId) => {
     socketId: socket.id,
     username: socket.username,
   };
-  this.onUsersChange();
+  onUsersChange();
 };
 
 onDisconnect = (socket) => {
@@ -152,7 +152,7 @@ onDisconnect = (socket) => {
       socket.username
     } user disconnected`
   );
-  this.onUsersChange();
+  onUsersChange();
 };
 
 emit = (event, userId, data) => {
