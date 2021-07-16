@@ -172,7 +172,7 @@
 
 const express = require("express");
 const app = express();
-const port = 8002;
+const port = 8001;
 var server = require("http").Server(app);
 const io = require("socket.io")(server);
 // const users = require("./configs/users");
